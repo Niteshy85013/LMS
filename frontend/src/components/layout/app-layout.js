@@ -15,7 +15,7 @@ import {
 } from "@mui/material"
 import { useUser } from "../../context/user-context"
 import { Route, Routes, Navigate, Link } from "react-router-dom"
-import AdbIcon from "@mui/icons-material/Adb"
+
 import { BooksList } from "../books-list/books-list"
 import { LoginDialog } from "../login/login-dialog"
 import { BookForm } from "../book-form/book-form"
@@ -67,7 +67,14 @@ export const AppLayout = () => {
             <AppBar position="static">
                 <Container maxWidth="xl">
                     <Toolbar disableGutters>
-                        <AdbIcon sx={{ display: "flex", mr: 1 }} />
+                    <Box 
+  component="img" 
+  src="/logo.png" 
+  alt="Logo" 
+  sx={{ display: "flex", mr: 1, height: 50, width: 50 }} 
+/>
+
+
                         <Link to="/" style={{ textDecoration: "none", flexGrow: 1 }}>
                             <Typography
                                 variant="h6"
@@ -174,4 +181,5 @@ export const AppLayout = () => {
             />
         </>
     )
+    
 }
