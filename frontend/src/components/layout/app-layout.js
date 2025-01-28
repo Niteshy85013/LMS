@@ -22,6 +22,7 @@ import { BookForm } from "../book-form/book-form"
 import { Book } from "../book/book"
 import { WithLoginProtector } from "../access-control/login-protector"
 import { WithAdminProtector } from "../access-control/admin-protector"
+import { DashboardList } from "../dashboard/dashboard"
 
 
 export const AppLayout = () => {
@@ -38,6 +39,10 @@ export const AppLayout = () => {
     const handleCloseUserMenu = () => {
         setAnchorElUser(null)
     }
+
+    const handleMenuItemClick = () => {
+        navigate("/dashboard"); // Navigate to the /dashboard route
+      };
 
     const handleLoginSubmit = (username, password) => {
         loginUser(username, password)
@@ -119,9 +124,15 @@ export const AppLayout = () => {
                             open={Boolean(anchorElUser)}
                             onClose={handleCloseUserMenu}
                         >
-                            <MenuItem onClick={handleCloseUserMenu}>
+                            <MenuItem onClick={handleMenuItemClick}>
                                 <Typography textAlign="center">Dashboard</Typography>
                             </MenuItem>
+                            {/* <MenuItem onClick={() => { 
+  handleCloseUserMenu(); 
+  navigate('/dashboard'); // Navigate to the dashboard route
+}}>
+  <Typography textAlign="center">Dashboard</Typography>
+</MenuItem> */}
                             <MenuItem onClick={handleLogout}>
                                 <Typography textAlign="center">Logout</Typography>
                             </MenuItem>
@@ -132,7 +143,7 @@ export const AppLayout = () => {
                         onClick={() => {
                             setOpenLoginDialog(true)
                         }}
-                        sx={{ my: 2, color: "white", display: "block" }}
+                        sx={{ my: 2, color: "red", display: "block", fontWeight: "bold" }}
                     >
                         Login
                     </Button>
@@ -144,6 +155,7 @@ export const AppLayout = () => {
 
             <Routes>
                 <Route path="/books" exact element={<BooksList />} />
+                <Route path="/dashboard" exact element={<DashboardList />} />
                 <Route
                     path="/books/:bookIsbn"
                     element={

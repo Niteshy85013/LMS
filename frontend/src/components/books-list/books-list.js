@@ -1,5 +1,10 @@
+/* eslint-disable react/jsx-no-undef */
 import { useState, useEffect } from "react"
 import { Link as RouterLink } from "react-router-dom"
+import DeleteIcon from '@mui/icons-material/Delete';
+import IconButton from '@mui/material/IconButton';
+import EditIcon from '@mui/icons-material/Edit';
+
 import {
     Button,
     Paper,
@@ -108,18 +113,17 @@ export const BooksList = () => {
                                                     </Button>
                                                     {isAdmin && (
                                                         <>
-                                                            <Button
-                                                                variant="contained"
+                                                            <IconButton
                                                                 color="primary"
                                                                 component={RouterLink}
                                                                 size="small"
                                                                 to={`/admin/books/${book.isbn}/edit`}
                                                             >
-                                                                Edit
-                                                            </Button>
-                                                            <Button
+                                                                <EditIcon />
+                                                            </IconButton>
+                                                            {/* <Button
                                                                 variant="contained"
-                                                                color="secondary"
+                                                                color="error"
                                                                 size="small"
                                                                 onClick={(e) => {
                                                                     setActiveBookIsbn(book.isbn)
@@ -127,7 +131,18 @@ export const BooksList = () => {
                                                                 }}
                                                             >
                                                                 Delete
-                                                            </Button>
+                                                            </Button> */}
+                                                            <IconButton
+                                                                color="error"  // This will make the icon red
+                                                                size="small"
+                                                                onClick={(e) => {
+                                                                    setActiveBookIsbn(book.isbn);
+                                                                    setOpenModal(true);
+                                                                }}
+                                                            >
+                                                                <DeleteIcon /> {/* The delete icon */}
+                                                            </IconButton>
+
                                                         </>
                                                     )}
                                                 </div>
