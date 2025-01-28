@@ -38,8 +38,6 @@ export const DashboardList = () => {
         setBorrowedBook(books)
     }
 
-
-
     useEffect(() => {
         fetchBooks().catch(console.error)
         fetchUserBook().catch(console.error)
@@ -64,6 +62,7 @@ export const DashboardList = () => {
                                                     <TableCell align="right">ISBN</TableCell>
                                                     <TableCell>Category</TableCell>
                                                     <TableCell align="right">Price</TableCell>
+                                                    <TableCell>Action</TableCell>
                                                     <TableCell></TableCell>
                                                 </TableRow>
                                             </TableHead>
@@ -75,10 +74,11 @@ export const DashboardList = () => {
                                                         </TableCell>
                                                         <TableCell align="right">{book.isbn}</TableCell>
                                                         <TableCell>{book.category}</TableCell>
-                                                        <TableCell align="right">{`$${book.price}`}</TableCell>
+                                                        <TableCell align="right">{`Rs. ${book.price}`}</TableCell>
                                                         <TableCell>
                                                             <div className={classes.actionsContainer}>
                                                                 <Button
+                                                                
                                                                     variant="contained"
                                                                     component={RouterLink}
                                                                     size="small"

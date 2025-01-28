@@ -11,6 +11,8 @@ const BookModel = model(
     borrowedBy: [{ type: Schema.Types.ObjectId, ref: "users" }],
     priceHistory: { type: Array, required: true, default: [] },
     quantityHistory: { type: Array, required: true, default: [] },
+    // image: { type: String, required: false },
+    // image: "https://example.com/images/book.jpg",
   })
 )
 
