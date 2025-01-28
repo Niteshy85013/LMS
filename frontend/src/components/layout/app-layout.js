@@ -57,90 +57,91 @@ export const AppLayout = () => {
         if (!user) {
             navigate("/")
         } else if (isAdmin) {
-            navigate("/admin/books/add")
+            navigate("/admin/books/")
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [user, isAdmin])
 
     return (
         <>
-            <AppBar position="static">
-                <Container maxWidth="xl">
-                    <Toolbar disableGutters>
-                    <Box 
-  component="img" 
-  src="/logo.png" 
-  alt="Logo" 
-  sx={{ display: "flex", mr: 1, height: 50, width: 50 }} 
-/>
-
-
-                        <Link to="/" style={{ textDecoration: "none", flexGrow: 1 }}>
-                            <Typography
-                                variant="h6"
-                                noWrap
-                                sx={{
-                                    mr: 2,
-                                    display: "flex",
-                                    fontFamily: "monospace",
-                                    fontWeight: 700,
-                                    letterSpacing: ".3rem",
-                                    color: "white",
-                                }}
-                            >
-                                Library Management System
-                            </Typography>
-                        </Link>
-                        <Box
-                            sx={{
-                                flexGrow: 0,
+            <AppBar position="static" sx={{ backgroundColor: "#8ecae6" }}>
+    <Container maxWidth="xl">
+        <Toolbar disableGutters>
+            <Box 
+                component="img" 
+                src="/logo.png" 
+                alt="Logo" 
+                sx={{ display: "flex", mr: 1, height: 50, width: 50 }} 
+            />
+            <Link to="/" style={{ textDecoration: "none", flexGrow: 1 }}>
+                <Typography
+                    variant="h6"
+                    noWrap
+                    sx={{
+                        mr: 2,
+                        display: "flex",
+                        fontFamily: "monospace",
+                        fontWeight: 700,
+                        letterSpacing: ".3rem",
+                        color: "black", // This keeps the text white for contrast
+                    }}
+                >
+                    Library Management System
+                </Typography>
+            </Link>
+            <Box
+                sx={{
+                    flexGrow: 0,
+                }}
+            >
+                {user ? (
+                    <>
+                        <Tooltip title="Open settings">
+                        <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+    <Avatar sx={{ backgroundColor: "#e76f51" }}>
+        {user.username.charAt(0).toUpperCase()}
+    </Avatar>
+</IconButton>
+                        </Tooltip>
+                        <Menu
+                            sx={{ mt: "45px" }}
+                            id="menu-appbar"
+                            anchorEl={anchorElUser}
+                            anchorOrigin={{
+                                vertical: "top",
+                                horizontal: "right",
                             }}
+                            keepMounted
+                            transformOrigin={{
+                                vertical: "top",
+                                horizontal: "right",
+                            }}
+                            open={Boolean(anchorElUser)}
+                            onClose={handleCloseUserMenu}
                         >
-                            {user ? (
-                                <>
-                                    <Tooltip title="Open settings">
-                                        <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                            <Avatar> {user.username.charAt(0).toUpperCase()} </Avatar>
-                                        </IconButton>
-                                    </Tooltip>
-                                    <Menu
-                                        sx={{ mt: "45px" }}
-                                        id="menu-appbar"
-                                        anchorEl={anchorElUser}
-                                        anchorOrigin={{
-                                            vertical: "top",
-                                            horizontal: "right",
-                                        }}
-                                        keepMounted
-                                        transformOrigin={{
-                                            vertical: "top",
-                                            horizontal: "right",
-                                        }}
-                                        open={Boolean(anchorElUser)}
-                                        onClose={handleCloseUserMenu}
-                                    >
-                                        <MenuItem onClick={handleCloseUserMenu}>
-                                            <Typography textAlign="center">Dashboard</Typography>
-                                        </MenuItem>
-                                        <MenuItem onClick={handleLogout}>
-                                            <Typography textAlign="center">Logout</Typography>
-                                        </MenuItem>
-                                    </Menu>
-                                </>
-                            ) : (
-                                <Button
-                                    onClick={() => {
-                                        setOpenLoginDialog(true)
-                                    }}
-                                    sx={{ my: 2, color: "white", display: "block" }}
-                                >
-                                    Login
-                                </Button>
-                            )}
-                        </Box>
-                    </Toolbar>
-                </Container>
-            </AppBar>
+                            <MenuItem onClick={handleCloseUserMenu}>
+                                <Typography textAlign="center">Dashboard</Typography>
+                            </MenuItem>
+                            <MenuItem onClick={handleLogout}>
+                                <Typography textAlign="center">Logout</Typography>
+                            </MenuItem>
+                        </Menu>
+                    </>
+                ) : (
+                    <Button
+                        onClick={() => {
+                            setOpenLoginDialog(true)
+                        }}
+                        sx={{ my: 2, color: "white", display: "block" }}
+                    >
+                        Login
+                    </Button>
+                )}
+            </Box>
+        </Toolbar>
+    </Container>
+</AppBar>
+
             <Routes>
                 <Route path="/books" exact element={<BooksList />} />
                 <Route
