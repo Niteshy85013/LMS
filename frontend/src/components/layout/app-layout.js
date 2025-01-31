@@ -91,7 +91,7 @@ export const AppLayout = () => {
                         color: "black", // This keeps the text white for contrast
                     }}
                 >
-                    Library Management System
+                    HamroKitab
                 </Typography>
             </Link>
             <Box
